@@ -1,0 +1,27 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "teste nodejs",
+  "main": "js11.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Curtixx/lista-de-javascript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Curtixx/lista-de-javascript/issues"
+  },
+  "homepage": "https://github.com/Curtixx/lista-de-javascript#readme",
+  "dependencies": {
+    "bad-words": "^3.0.4",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "message-box": "^0.2.7",
+    "mysql": "^2.18.1"
+  }
+}

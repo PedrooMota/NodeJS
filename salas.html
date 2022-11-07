@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@200;400;600&family=Poppins:wght@200;300;400&display=swap');
+            *{
+                font-family: 'Noto Sans Mono', monospace;
+                font-family: 'Poppins', sans-serif;
+            }
+            
+            .btn-lg{
+                margin-left: -370px;
+                background: #ff008a;
+                border-radius: 20px;
+                outline: none;
+                border: none;
+                margin-top: 15px;
+                color: white;
+            }
+            nav{
+                background-color: black;
+                text-decoration: none;
+                
+            }
+
+            main{
+            background-color: #bbb;
+            max-width: 600px;
+            min-height: 500px;
+            margin: auto;
+            margin-top: 5vh;
+            font-size: 1em;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px rgb(15, 10, 10) 
+        }
+
+            body{
+              overflow: hidden;
+            }
+
+            .col-sidebar{
+              scrollbar-width: none;
+              background-color: #bbb;
+              width: 500px;
+              height: 82vh;
+              overflow-y: scroll;
+            }
+
+            .col-sidebar2{
+              margin: 70px;
+            }
+
+            
+
+           
+
+            .bott{
+              width: 250px;
+              height: 70px;
+              margin-bottom:30px;
+              margin-left: 50px;
+              
+            }
+           
+ 
+    </style>
+    <script>
+      function listar(){
+        console.log("listar!!")
+        let url = "http://localhost:8080/sala";
+        let req = new XMLHttpRequest();
+        req.open("GET", url, false);
+        req.send();
+        let res = JSON.parse(req.responseText);
+        let div = document.getElementById("salas");
+        document.getElementById("salas").innerHTML = ""
+        let info = res.info;
+        info.map((json,indice)=>{
+          div.innerHTML += "<b>Nome do chat:</b> "+json.nome + "<br><br>";
+          div.innerHTML += "<b>Descrição do chat:</b> "+json.desc + "<br><br>";
+          div.innerHTML += "<b>Nome do usúario que criou o chat:</b> "+json.nome_user + "<br><br>";
+          div.innerHTML += `<a href='/sala/id${json.idsala}'><button type='button' class='btn btn-success'>Ver</button></a>`;
+          div.innerHTML += "<hr>";
+        });
+        
+      }
+
+      function criarsala(){
+        let nomesala = document.getElementById("txtNomeSala").value
+        let descricao = document.getElementById("txtDesc").value
+
+        let json = {
+          sala: nomesala,
+          descricao: descricao
+        }
+
+        let url = "http://localhost:8080/criarsalaC";
+        let req = new XMLHttpRequest();
+        req.open("POST", url, true);
+        req.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+        req.send(JSON.stringify(json))
+        
+        listar()
+      }
+
+      // function pesquisar(){
+      //   let pesquisaSala = document.getElementById("txtsala").value
+        
+      //   let json = {
+      //     pesquisa: pesquisaSala
+      //   }
+
+      //   let url = "http://localhost:8080/pesquisarSala";
+      //   let req = new XMLHttpRequest();
+      
+      //   req.onreadystatechange = function(){
+      //     if(this.readyState == 4 && this.status == 200){
+      //         var dados = JSON.parse(this.responseText)
+                    
+      //     }
+      //   }
+      //   req.setRequestHeader("Content-Type", "application/json;charset=UTF-8")
+      //   req.send(JSON.stringify(json))
+      //   req.open("POST", url, true);
+      //   alert("TESTE")
+    
+      // } 
+
+    </script>
+</head>
+<body onload="listar()">
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <form action="/pesquisarSala" method="POST">
+          <input class="form-control mr-sm-2" type="text" placeholder="Buscas salas..." id="txtsala" name="txtsala" required>
+          <button class="btn btn-success" "type="submit"">Search</button>
+        </form>
+        <a href="/logout"><button type='button' class='btn btn-success' style="margin-left: 10px;">Sair</button></a>
+        <p style="color: white; margin-left: 900px;">Clique no botão para ver as mensagens com mais curtidas</p>
+        <a href="/ranque"><button type='button' class='btn btn-success' style="margin-left: 10px;">Ver</button></a>
+      </nav>
+      
+      
+ 
+      
+  
+    <center><div class="bott">
+    <h2>Criar Sala:</h2>
+      <button class="btn-success" data-toggle="modal" data-target="#myModal">+</button>
+    </div></center>  
+   
+    <div class="row ml-1">
+      <div class="col-sidebar">
+        <div id="body-chat mt-2">
+          <!-- Insere as salas nessa DIV -->
+          <center><h3>Salas Criadas:</h3><br>
+          <div id="salas">
+           
+          </div></center>
+        </div>
+      </div>
+      <main>
+      <center><div class="col-sidebar2">
+        <h1>Seja Bem-Vindo!</h1> 
+        <h3>Crie sua salas e participe das salas de outras pessoas.</h3>
+        <h4>Para criar uma sala, acesse o botão acima!! </h4>
+              </div></center>
+      </main>
+      </div>
+    </div>
+  
+    <!-- Trigger the modal with a button -->
+      
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Criação de Sala</h4><br>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="criar Salas">
+                  <label for="nomeSala">Digite o nome da sala:</label>
+                  <input type="text" name="txtNomeSala" id="txtNomeSala" class="form-control" required><br>
+                  <label for="Descricao">Digite a descrição da sala:</label>
+                  <input type="text" name="txtDesc" id="txtDesc" class="form-control" required>
+                  <hr>
+                  <button onclick="criarsala()" class="btn btn-default">Criar</button>
+                </div>
+             
+            </div>
+            
+          </div>
+          
+        </div>
+      </div>
+          
+  </div>  
+    <div id="pesquisa"></div>
+
+    <footer>
+
+    </footer>
+   
+   
+  
+</body>
+</html>

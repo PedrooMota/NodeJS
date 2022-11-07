@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de login</title>
+    
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: linear-gradient(45deg, rgb(17, 255, 0), rgb(0, 247, 255));
+        }
+        div{
+            background-color: rgba(0, 0, 0, 0.9);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            padding: 80px;
+            border-radius: 15px;
+            color: #fff;
+        }
+        input{
+            padding: 15px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            border-radius: 10px;
+            width: 88%;
+        }
+        button{
+            background-color: dodgerblue;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 10px;
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            
+        }
+        button:hover{
+            background-color: deepskyblue;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        h1{
+            color:white;
+        }
+        a{
+            color: #5568FE;
+            text-decoration: none;
+        }
+
+        
+    </style>
+
+</head>
+<body onload="logado('login')">
+    <div>
+        <h1>Login</h1>
+        <form action="/loginC" method="post" id="myForm" >
+            <input type="text" placeholder="User" id="txtUser" name="txtUser" required>
+            <br><br>
+            <input type="password" placeholder="Senha" id="txtSenha" name="txtSenha" required>
+            
+            <br><br>
+            <button>Enviar</button>
+            <p>Ainda não possui login? <a href="/cadastro">Cadastre-se</a></p>
+        </form>
+    </div>
+
+   
+   
+   
+</body>
+</html>

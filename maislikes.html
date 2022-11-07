@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Top 10 mais likes</title>
+    <style>
+        main{
+            background-color: rgba(221, 202, 202, 0.976);
+            max-width: 850px;
+            min-height: 500px;
+            margin: auto;
+            margin-top: 5vh;
+            font-size: 1em;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px rgb(15, 10, 10) 
+        }
+    </style>
+    <script>
+        function teste(){
+            let url = "http://localhost:8080/maiscurtidas";
+            let req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send();
+            let res = JSON.parse(req.responseText);
+            let div = document.getElementById("oi")
+            let info = res.info;
+            info.map((json,indice)=>{
+                div.innerHTML +="<b>Mensagem:</b> "+ json.msg + "<br>";
+                div.innerHTML +="<b>Dia: </b>"+ json.data + "<br>";
+                div.innerHTML +="<b>Quantidades de Likes: </b>"+ json.likes + "<br>";
+                div.innerHTML +="<b>Usuario que realizou o comentário: </b>"+ json.user + "<br><br><hr>"; 
+            });
+        }
+    </script>
+</head>
+<body onload="teste()">
+    <center><h1>Top 10 mais curtidos</h1></center>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/salas">Home</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <main>
+    <h1>Mensagem com mais curtidas: </h1> <br>
+    <div class="oi" id="oi"></div>
+    <b></b>
+    </main>
+</body>
+</html>
